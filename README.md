@@ -1,13 +1,13 @@
 # Adcash-API-Task
 
-####Technology
+#### Technology
   
   ```
 $ Springbook
 $ Java 11 
 $ Mavin
 ```
-####Project Setup
+#### Project Setup
 
   ```
 $ git clone https://github.com/Clogogo/adcash-API-Task.git
@@ -17,7 +17,7 @@ mvn install
 
  ```
 
-#### Controllers
+#### Controller
  ```
 http://localhost:8080/api/
 
