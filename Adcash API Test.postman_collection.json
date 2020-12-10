@@ -1,0 +1,516 @@
+{
+	"info": {
+		"_postman_id": "365f0f5d-9ee9-41f8-bb04-d7fc4f90d83b",
+		"name": "Adcash API Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "add_Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ca811b1c-9bd5-46e8-9201-1fa338d1b00f",
+								"exec": [
+									"pm.environment.set(\"name\", \"Food\");",
+									"",
+									"if (pm.response.code===201){",
+									"    pm.test(\"Successful POST request\", () => ",
+									"    {",
+									"    pm.response.to.have.status(201);",
+									"    });",
+									"} ",
+									"",
+									"else {",
+									"pm.test(\"POST Should Failed Duplicate Category\", () => {",
+									"    pm.response.to.have.status(409);",
+									" });",
+									"",
+									" pm.test(\"status should contain No body\", () => {",
+									"pm.response.to.not.have.body;",
+									"});",
+									"",
+									"}",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"hi\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Categories",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6b7452c0-783f-4893-ab6d-f01116bec00e",
+								"exec": [
+									"",
+									"pm.test(\"status should contain body\", () => {",
+									"pm.response.to.have.body;",
+									"});",
+									"",
+									"pm.test(\"Should have 200 OK status code\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Body should have the correct data', () => {",
+									"    const body = pm.response.json();",
+									"    pm.expect(body.length).to.be.ok;",
+									"    ",
+									"    body.forEach((item) => {",
+									"        pm.expect(item.id).to.be.ok;",
+									"        pm.expect(item.name).to.be.ok",
+									"    });",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/categories/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"categories",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Category by {id}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "85e28a7d-9987-487d-9205-079143fd09bd",
+								"exec": [
+									"",
+									"if (pm.response.code===200){",
+									"    ",
+									"",
+									"pm.test(\"status should contain body\", () => {",
+									"pm.response.to.have.body;",
+									"});",
+									"",
+									"pm.test(\"Should have 200 OK status code\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Body should have the correct data', () => {",
+									"    const body = pm.response.json();",
+									"    pm.expect(body.id).to.be.ok;",
+									"    pm.expect(body.name).to.be.ok;",
+									"    ",
+									"});",
+									"",
+									"} else{",
+									"",
+									"    pm.test(\"status should contain No body\", () => {",
+									"pm.response.to.not.have.body;",
+									"});",
+									"",
+									"pm.test(\"Should have 404 Not Found status code \", () => {",
+									"    pm.response.to.have.status(404);",
+									" });",
+									"}",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/category/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"category",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update_category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "01cdb8f5-d6fc-4fe4-adde-583fd9c00789",
+								"exec": [
+									"",
+									"if (pm.response.code===200){",
+									"    pm.test(\"Successful PUT request\", () => ",
+									"    {",
+									"    pm.response.to.have.status(200);",
+									"    });",
+									"} ",
+									"",
+									"else {",
+									"pm.test(\"PUT request should Fail \", () => {",
+									"    pm.expect(pm.response.code).to.be.oneOf([404,409]);",
+									" });",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"name\": \"hahah\" \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/category/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"category",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "60ad2e55-6467-4b21-b4b3-86b2fc8d93e6",
+								"exec": [
+									"",
+									"if (pm.response.code===200){",
+									"    pm.test(\"Successful Delete request\", () => ",
+									"    {",
+									"    pm.response.to.have.status(200);",
+									"    });",
+									"} ",
+									"",
+									"else {",
+									"pm.test(\"Delete request should Fail \", () => {",
+									"    pm.expect(pm.response.code).to.be.oneOf([404]);",
+									" });",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/category/delete/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"category",
+								"delete",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Add Product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"hya\"\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/1/product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"1",
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "25a73cd0-7f6e-4ce7-baa6-58f39ebed9b6",
+								"exec": [
+									"",
+									"if (pm.response.code===200){",
+									"pm.test(\"status should contain body\", () => {",
+									"pm.response.to.have.body;",
+									"});",
+									"",
+									"pm.test(\"Should have 200 OK status code\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Body should have the correct data', () => {",
+									"    const body = pm.response.json();",
+									"    pm.expect(body.length).to.be.ok;",
+									"    ",
+									"    body.forEach((item) => {",
+									"        pm.expect(item.id).to.be.ok;",
+									"        pm.expect(item.name).to.be.ok",
+									"    });",
+									"});",
+									"",
+									"} else {",
+									"pm.test(\"status should not contain body\", () => {",
+									"pm.response.to.not.have.body;",
+									"});",
+									"",
+									"pm.test(\"Should have 204 OK status code\", () => {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									"",
+									"",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "23281418-a0fa-4fac-8c4d-78e9fd798c39",
+								"exec": [
+									"",
+									"if (pm.response.code===200){",
+									"    pm.test(\"Successful PUT request\", () => ",
+									"    {",
+									"    pm.response.to.have.status(200);",
+									"    });",
+									"} ",
+									"",
+									"else {",
+									"pm.test(\"PUT request should Fail \", () => {",
+									"    pm.expect(pm.response.code).to.be.oneOf([404,409,503]);",
+									" });",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 2,\n    \"name\":\"clock\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "790589e0-62ae-4661-ba19-fa56d5b5e971",
+								"exec": [
+									"",
+									"if (pm.response.code===200){",
+									"    pm.test(\"Successful Delete request\", () => ",
+									"    {",
+									"    pm.response.to.have.status(200);",
+									"    });",
+									"} ",
+									"",
+									"else {",
+									"pm.test(\"Delete request should Fail \", () => {",
+									"    pm.expect(pm.response.code).to.be.oneOf([404]);",
+									" });",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/delete/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"delete",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

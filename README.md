@@ -4,6 +4,7 @@
   
   ```
 $ Springbook
+$ Lomnok
 $ Java 11 
 $ Mavin
 ```
@@ -17,11 +18,11 @@ mvn install
 
  ```
 
-#### Controller
+#### PostMan
  ```
-http://localhost:8080/api/
+ Adcash API Test.postman_collection.json
 
  ```
   
-  
+
 
