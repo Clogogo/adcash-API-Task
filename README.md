@@ -4,7 +4,7 @@
   
   ```
 $ Springbook
-$ Lomnok
+$ lombok
 $ Java 11 
 $ Mavin
 ```
